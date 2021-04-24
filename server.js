@@ -7,6 +7,7 @@
 const debug = require("debug")("test:server");
 const http = require("http");
 const app = require("./src/app");
+const mongoose = require("mongoose");
 
 /**
  * Normalize a port into a number, string, or false.
@@ -67,6 +68,20 @@ function onListening() {
   debug(`Listening on ${bind}`);
 }
 
-server.listen(port);
+const DB_PASS = "4L2HfkE1QHvLkorE";
+const DB_URL = `mongodb+srv://engie-user:${DB_PASS}@cluster0.tpnux.mongodb.net/engie-db?retryWrites=true&w=majority`;
+mongoose
+  .connect(DB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Connection to MongoDB succeeded !");
+    server.listen(port);
+  })
+  .catch(err => {
+    console.log(err);
+  });
+
 server.on("error", onError);
 server.on("listening", onListening);

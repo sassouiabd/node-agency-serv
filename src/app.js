@@ -9,7 +9,7 @@ const cors = require("cors");
 // Routers
 const indexRouter = require("./routes/index.route");
 const signInRooter = require("./routes/signIn.route");
-const agenciesRooter = require("./routes/agencies.route");
+const agencyRooter = require("./routes/agency.route");
 
 const app = express();
 
@@ -30,7 +30,7 @@ app.use("/public", express.static(path.join(__dirname, "../public")));
 // Routes
 app.use("/", indexRouter);
 app.use("/signIn", signInRooter);
-app.use("/agencies", agenciesRooter);
+app.use("/agency", agencyRooter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -49,3 +49,18 @@ app.use((err, req, res) => {
 });
 
 module.exports = app;
+
+const MongoClient = require("mongodb").MongoClient;
+const uri =
+  "mongodb+srv://engie-user:<password>@cluster0.tpnux.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+client.connect(err => {
+  const collection = client.db("test").collection("devices");
+  // perform actions on the collection object
+  client.close();
+});
+
+
