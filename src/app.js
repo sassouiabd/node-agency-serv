@@ -6,9 +6,11 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
 
+const auth = require("./middlewares/auth.middleware");
+
 // Routers
 const indexRouter = require("./routes/index.route");
-const signInRooter = require("./routes/signIn.route");
+const userRooter = require("./routes/user.route");
 const agencyRooter = require("./routes/agency.route");
 
 const app = express();
@@ -29,8 +31,8 @@ app.use("/public", express.static(path.join(__dirname, "../public")));
 
 // Routes
 app.use("/", indexRouter);
-app.use("/signIn", signInRooter);
-app.use("/agency", agencyRooter);
+app.use("/auth", userRooter);
+app.use("/agency", auth, agencyRooter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -62,5 +64,3 @@ client.connect(err => {
   // perform actions on the collection object
   client.close();
 });
-
-
