@@ -1,6 +1,9 @@
 const Agency = require("../models/agency.model");
 
-exports.add = async (req, res) => {
+import { Request, Response } from "express";
+import { IAgency } from "../types";
+
+exports.add = async (req: Request, res: Response) => {
   try {
     const { Nom, Responsable, Activité } = req.body;
     const agency = new Agency({
@@ -8,7 +11,7 @@ exports.add = async (req, res) => {
       Responsable,
       Activité,
     });
-    agency.save().then(result => {
+    agency.save().then(() => {
       res.json({
         message: "Agency created !",
       });
@@ -20,9 +23,9 @@ exports.add = async (req, res) => {
   }
 };
 
-exports.retriveAll = async (req, res) => {
+exports.retriveAll = async (req: Request, res: Response) => {
   try {
-    Agency.find().then(agencies => {
+    Agency.find().then((agencies: IAgency[]) => {
       console.log(agencies);
       res.json({
         agencies,

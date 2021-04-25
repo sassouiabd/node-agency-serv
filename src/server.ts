@@ -7,13 +7,14 @@
 const debug = require("debug")("test:server");
 const http = require("http");
 const app = require("./app");
-const mongoose = require("mongoose");
+
+import mongoose from "mongoose";
 
 /**
  * Normalize a port into a number, string, or false.
  */
 
-function normalizePort(val) {
+function normalizePort(val: string) {
   const lport = parseInt(val, 10);
 
   if (Number.isNaN(lport)) {
@@ -36,7 +37,7 @@ app.set("port", port);
  * Event listener for HTTP server "error" event.
  */
 
-function onError(error) {
+function onError(error: any) {
   if (error.syscall !== "listen") {
     throw error;
   }
