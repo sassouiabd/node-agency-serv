@@ -1,0 +1,14 @@
+{
+  "id": "e7420a4b-00c4-46f2-9737-abd011730cd5",
+  "name": "localhost",
+  "values": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000",
+      "enabled": true
+    }
+  ],
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2021-04-04T07:37:24.259Z",
+  "_postman_exported_using": "Postman/8.1.0"
+}

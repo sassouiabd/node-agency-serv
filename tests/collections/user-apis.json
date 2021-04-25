@@ -1,0 +1,163 @@
+{
+	"info": {
+		"_postman_id": "87bc183a-eeff-4739-b688-0dfecb241ace",
+		"name": "engie-node APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "access home page",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "retrive all agencies",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Your test name\", function () {\r",
+							"\r",
+							"    const ref = {\r",
+							"        \"agencies\": [\r",
+							"            {\r",
+							"                \"_id\": \"6083ef8d02c1262f4c19fb1a\",\r",
+							"                \"Nom\": \"Agence de Lyon\",\r",
+							"                \"Responsable\": \"Jean\",\r",
+							"                \"Activité\": \"Électrique\",\r",
+							"                \"__v\": 0\r",
+							"            },\r",
+							"            {\r",
+							"                \"_id\": \"6083efa802c1262f4c19fb1b\",\r",
+							"                \"Nom\": \"Agence de Toulouse\",\r",
+							"                \"Responsable\": \"Marc\",\r",
+							"                \"Activité\": \"Climatisation\",\r",
+							"                \"__v\": 0\r",
+							"            },\r",
+							"            {\r",
+							"                \"_id\": \"6083efcb02c1262f4c19fb1c\",\r",
+							"                \"Nom\": \"Agence de Paris\",\r",
+							"                \"Responsable\": \"Sophie\",\r",
+							"                \"Activité\": \"Plomberie\",\r",
+							"                \"__v\": 0\r",
+							"            },\r",
+							"            {\r",
+							"                \"_id\": \"6083efdd02c1262f4c19fb1d\",\r",
+							"                \"Nom\": \"Agence de Grenoble\",\r",
+							"                \"Responsable\": \"Claire\",\r",
+							"                \"Activité\": \"Électrique\",\r",
+							"                \"__v\": 0\r",
+							"            },\r",
+							"            {\r",
+							"                \"_id\": \"6083eff002c1262f4c19fb1e\",\r",
+							"                \"Nom\": \"Agence de Rennes\",\r",
+							"                \"Responsable\": \"Hugo\",\r",
+							"                \"Activité\": \"Électrique\",\r",
+							"                \"__v\": 0\r",
+							"            }\r",
+							"        ]\r",
+							"    }\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.deep.include(ref);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "userid",
+						"value": "test",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/agency/retriveAll",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"agency",
+						"retriveAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "manage to sign in",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"user@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/auth/signIn",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"auth",
+						"signIn"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
