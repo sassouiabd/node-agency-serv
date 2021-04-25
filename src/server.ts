@@ -81,7 +81,7 @@ mongoose
     console.log("Connection to MongoDB succeeded !");
     server.listen(port);
   })
-  .catch(err => {
+  .catch((err) => {
     console.log(err);
   });
 
