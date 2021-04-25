@@ -2,12 +2,15 @@ const User = require("../models/user.model");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-exports.signup = async (req, res) => {
+import { IRequestSignup, IUser } from "../types";
+import { Response } from "express";
+
+exports.signup = async (req: IRequestSignup, res: Response) => {
   const { password, email } = req.body;
   const salt = 10;
   bcrypt
     .hash(password, salt)
-    .then(hash => {
+    .then((hash: any) => {
       const user = new User({ email, password: hash });
       user
         .save()
@@ -20,21 +23,21 @@ exports.signup = async (req, res) => {
             .status(201)
             .json({ message: "User created !", userId: user._id, token });
         })
-        .catch(err => res.status(400).json({ error }));
+        .catch((error: any) => res.status(400).json({ error }));
     })
-    .catch(err => res.status(500).json({ error }));
+    .catch((error: any) => res.status(500).json({ error }));
 };
 
-exports.signin = async (req, res) => {
+exports.signin = async (req: IRequestSignup, res: Response) => {
   const { email, password } = req.body;
   User.findOne({ email })
-    .then(user => {
+    .then((user: IUser) => {
       if (!user) {
         return res.status(401).json({ error: "user not found" });
       }
       bcrypt
         .compare(password, user.password)
-        .then(valid => {
+        .then((valid: boolean) => {
           if (!valid) {
             return res.status(401).json({ error: "wrong password" });
           }
@@ -46,7 +49,7 @@ exports.signin = async (req, res) => {
             token,
           });
         })
-        .catch(error => res.status(500).json({ error }));
+        .catch((error: any) => res.status(500).json({ error }));
     })
-    .catch(error => res.status(500).json({ error }));
+    .catch((error: any) => res.status(500).json({ error }));
 };

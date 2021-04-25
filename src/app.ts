@@ -1,6 +1,8 @@
 require("dotenv").config();
 const createError = require("http-errors");
-const express = require("express");
+
+import express, { Request, Response, NextFunction } from "express";
+
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
@@ -35,12 +37,12 @@ app.use("/auth", userRooter);
 app.use("/agency", auth, agencyRooter);
 
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   next(createError(404));
 });
 
 // error handler
-app.use((err, req, res) => {
+app.use((err: any, req: Request, res: Response) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
@@ -59,7 +61,7 @@ const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-client.connect(err => {
+client.connect((err: any) => {
   const collection = client.db("test").collection("devices");
   // perform actions on the collection object
   client.close();
