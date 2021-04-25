@@ -2,7 +2,7 @@
   "name": "engie-serv",
   "version": "1.0.0",
   "description": "engie backend",
-  "main": "server.js",
+  "main": "src/server.js",
   "scripts": {
     "pretty": "prettier -w . ",
     "serv": "nodemon server.js",

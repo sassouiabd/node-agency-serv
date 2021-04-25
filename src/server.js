@@ -6,7 +6,7 @@
 
 const debug = require("debug")("test:server");
 const http = require("http");
-const app = require("./src/app");
+const app = require("./app");
 const mongoose = require("mongoose");
 
 /**
